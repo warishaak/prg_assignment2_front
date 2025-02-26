@@ -65,6 +65,55 @@ app.get('/api/messages', async (req, res) => {
   }
 });
 
+// New POST endpoint
+app.post('/api/new_drink', async (req, res) => {
+  try {
+    
+    // Call the Supabase Edge Function for drinks
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/drinks`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: JSON.stringify(req.body)
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('GET request error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// New GET endpoint
+app.get('/api/drinks', async (req, res) => {
+  try {
+
+    // Call the Supabase Edge Function for drinks
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/drinks`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('GET request error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Proxy server running on http://localhost:${PORT}`);
