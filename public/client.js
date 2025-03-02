@@ -94,8 +94,56 @@ const postDrink = async () => {
   }
 };
 
+const getCoffeeDrinks = async () => {
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Loading...";
+
+  try {
+    const response = await fetch(`/api/coffee_drinks`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  } catch (error) {
+    resultElement.textContent = `Error: ${error.message}`;
+  }
+};
+
+const postCoffeeDrink = async () => {
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Loading...";
+
+  try {
+    const response = await fetch(`/api/new_coffee_drink`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: "Latte", description: "Creamy espresso-based drink", rating: 5 }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  } catch (error) {
+    resultElement.textContent = `Error: ${error.message}`;
+  }
+};
+
+
 document
-  .getElementById("callFunction")
-  .addEventListener("click", getDrinks);
+    .getElementById("getCoffeeDrinks")
+    .addEventListener("click", getCoffeeDrinks);
 
 // To begin try adding another button to use the postMessage function
