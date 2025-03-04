@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewLog - Coffee Journal</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .drinks-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .add-drink-form {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .add-drink-form input, .add-drink-form select {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            max-width: 300px;
+            border: 2px solid #8B4513;
+            border-radius: 6px;
+        }
+
+        .add-drink-form button {
+            background: #8B4513;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-drink-form button:hover {
+            background-color: #A0522D;
+        }
+
+        .add-drink-form h2 {
+            color: #8B4513;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .drinks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .drinks-table th, .drinks-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #A0522D;
+        }
+
+        .drinks-table th {
+            background-color: #8B4513;
+            color: white;
+            font-weight: bold;
+        }
+
+        .action-buttons button {
+            margin: 0 5px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .edit-btn {
+            background: transparent;
+            border: 2px solid #8B4513;
+            color: #8B4513;
+        }
+
+        .edit-btn:hover {
+            background-color: #FDE68A;
+        }
+
+        .delete-btn {
+            background: #8B4513;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #A0522D;
+        }
+
+        .drinks-table tfoot {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="icon-container">
+            <img src="/icons/logo.png" alt="Logo Icon" class="icon">
+        </div>
+        <h1 class="title">BrewLog</h1>
+        <p class="subtitle">Personal journal for coffee adventures</p>
+    </header>
+
+    <div class="drinks-container">
+        <div class="add-drink-form">
+            <h2>Add New Coffee Drink</h2>
+            <form id="newDrinkForm" onsubmit="return false;">
+                <div>
+                    <input type="text" id="drinkName" placeholder="Drink Name" required="">
+                </div>
+                <div>
+                    <input type="text" id="drinkDescription" placeholder="Description" required="">
+                </div>
+                <div>
+                    <select id="drinkRating" required="">
+                        <option value="">Select Rating</option>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                </div>
+                <button onclick="addNewDrink()">Add Drink</button>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="drinks-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="drinksTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 BrewLog - Your Personal Coffee Journal</p>
+    </footer>
+</div>
+<script src="/js/coffeeDrinks.js"></script>
+</body>
