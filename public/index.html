@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Task 2 Starter Template</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrewLog - Coffee Journal</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Task 2 Starter Template</h1>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="icon-container">
+      <img src="/icons/logo.png" alt="Logo Icon" class="icon">
+    </div>
+    <h1 class="title">BrewLog</h1>
+    <p class="subtitle">Personal journal for coffee adventures</p>
+  </header>
 
-<button id="getCoffeeDrinks">Get Coffee Drinks</button>
-<button id="postCoffeeDrinks">Post Coffee Drinks</button>
+  <!-- Feature Highlights -->
+  <section class="features">
+    <button class="feature" id="getCoffeeDrinks">
+      <img src="/icons/cup.png" alt="Coffee Cup Icon" class="icon">
+      <h3>Log Coffee Drinks</h3>
+      <p>Record every drink you try with personal ratings.</p>
+    </button>
+      <button class="feature" id="getPhotos">
+      <img src="/icons/camera.png" alt="Camera Icon" class="icon">
+      <h3>Photo Memories</h3>
+      <p>Store photos of drinks and coffee shop experiences.</p>
+      </button>
+  </section>
 
-<!-- Buttons for Coffee Shops -->
-<button id="getCoffeeShops">Get Coffee Shops</button>
-<button id="postCoffeeShop">Post Coffee Shop</button>
-
-<!-- Buttons for Photos -->
-<button id="getPhotos">Get Photos</button>
-<button id="postPhoto">Post Photo</button>
-
-<!-- Buttons for Users -->
-<button id="getUsers">Get Users</button>
-<button id="postUser">Post User</button>
-
-<!-- Display area for results -->
-<div id="result">Results will appear here...</div>
-
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 BrewLog - Personal Coffee Journal</p>
+  </footer>
+</div>
 <script src="client.js"></script>
+
 </body>
 </html>
