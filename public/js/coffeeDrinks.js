@@ -62,31 +62,38 @@ async function addNewDrink() {
 }
 
 async function editDrink(id) {
+    console.log("Editing drink with ID:", id); // Debugging step
+
     const drink = await getDrinkById(id);
+    console.log("Fetched drink:", drink); // Check what is returned
+    if (!drink) {
+        alert("Error: Drink not found!");
+        return;
+    }
 
     const name = prompt('Enter new name:', drink.name);
     const description = prompt('Enter new description:', drink.description);
     const rating = parseInt(prompt('Enter new rating (1-5):', drink.rating));
 
     if (name && description && rating) {
-    try {
-    const response = await fetch(`/api/coffee_drinks/${id}`, {
-    method: 'PUT',
-    headers: {
-    'Content-Type': 'application/json',
-},
-    body: JSON.stringify({ name, description, rating }),
-});
+        try {
+            const response = await fetch(`/api/coffee_drinks/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, description, rating }),
+            });
 
-    if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-}
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
 
-    await getCoffeeDrinks();
-} catch (error) {
-    alert(`Error updating drink: ${error.message}`);
-}
-}
+            await getCoffeeDrinks();
+        } catch (error) {
+            alert(`Error updating drink: ${error.message}`);
+        }
+    }
 }
 
 async function deleteDrink(id) {
@@ -118,12 +125,12 @@ async function deleteDrink(id) {
 
 async function getDrinkById(id) {
     try {
-    const response = await fetch(`/api/coffee_drinks/${id}`);
-    if (!response.ok) throw new Error(`Error: ${response.status}`);
-    return await response.json();
-} catch (error) {
-    alert(`Error fetching drink: ${error.message}`);
-}
+        const response = await fetch(`/api/coffee_drinks/${id}`);
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        alert(`Error fetching drink: ${error.message}`);
+    }
 }
 
     document.addEventListener('DOMContentLoaded', getCoffeeDrinks);

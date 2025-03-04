@@ -111,6 +111,38 @@ app.delete('/api/coffee_drinks/:id', async (req, res) => {
   }
 });
 
+// READ - GET a specific coffee drink by ID
+app.get('/api/coffee_drinks/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Fetch the specific coffee drink by ID from Supabase
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/coffee_drinks?id=eq.${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': `${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    if (data.length === 0) {
+      return res.status(404).json({ error: "Drink not found" });
+    }
+
+    res.json(data[0]); // Return the first matching drink
+  } catch (error) {
+    console.error('GET request error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Proxy server running on http://localhost:${PORT}`);
