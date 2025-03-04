@@ -92,16 +92,19 @@ app.delete('/api/coffee_drinks/:id', async (req, res) => {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': `${SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json'
       }
     });
 
+    const data = await response.json();
+    console.log('Response data:', data);
+
     if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
+      throw new Error(`Supabase returned ${response.status}: ${data.error || response.statusText}`);
     }
 
-    const data = await response.json();
-    res.json(data);
+    res.json({ success: true, message: "Coffee drink deleted successfully" });
   } catch (error) {
     console.error('DELETE request error:', error);
     res.status(500).json({ error: error.message });
