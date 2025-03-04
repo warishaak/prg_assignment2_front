@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public')); // Serve static files from 'public' directory
 
-// New POST endpoint coffee_drinks
+// CREATE - POST endpoint for new coffee drink
 app.post('/api/new_coffee_drink', async (req, res) => {
   try {
     const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_drinks`, {
@@ -39,7 +39,7 @@ app.post('/api/new_coffee_drink', async (req, res) => {
   }
 });
 
-// New GET endpoint coffee_drinks
+// READ - GET endpoint for coffee drinks
 app.get('/api/coffee_drinks', async (req, res) => {
   try {
     const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_drinks`, {
@@ -61,13 +61,14 @@ app.get('/api/coffee_drinks', async (req, res) => {
   }
 });
 
-// New POST endpoints for coffee_shops, photos, and users
-app.post('/api/new_coffee_shop', async (req, res) => {
+// UPDATE - PUT endpoint for updating coffee drink
+app.put('/api/coffee_drinks/:id', async (req, res) => {
   try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_shops`, {
-      method: 'POST',
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_drinks/${req.params.id}`, {
+      method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(req.body)
     });
@@ -79,18 +80,19 @@ app.post('/api/new_coffee_shop', async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('POST request error:', error);
+    console.error('PUT request error:', error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// New GET endpoints coffee_shop
-app.get('/api/coffee_shops', async (req, res) => {
+// DELETE - DELETE endpoint for coffee drink
+app.delete('/api/coffee_drinks/:id', async (req, res) => {
   try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_shops`, {
-      method: 'GET',
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/coffee_drinks/${req.params.id}`, {
+      method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
       }
     });
 
@@ -101,97 +103,7 @@ app.get('/api/coffee_shops', async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('GET request error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// New POST endpoints for photos
-app.post('/api/new_photo', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/photos`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      },
-      body: JSON.stringify(req.body)
-    });
-
-    if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error('POST request error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// New GET endpoints photos
-app.get('/api/photos', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/photos`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error('GET request error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// New POST endpoints for users
-app.post('/api/new_user', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/users`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      },
-      body: JSON.stringify(req.body)
-    });
-
-    if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error('POST request error:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// New GET endpoints for users
-app.get('/api/users', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/users`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    res.json(data);
-  } catch (error) {
-    console.error('GET request error:', error);
+    console.error('DELETE request error:', error);
     res.status(500).json({ error: error.message });
   }
 });
