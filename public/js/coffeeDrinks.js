@@ -23,6 +23,7 @@ async function getCoffeeDrinks() {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const drinks = await response.json();
         displayCoffeeDrinks(drinks);
+        return drinks;
     } catch (error) {
         console.error('Error fetching drinks:', error);
     }
@@ -131,6 +132,15 @@ async function getDrinkById(id) {
     } catch (error) {
         alert(`Error fetching drink: ${error.message}`);
     }
+}
+
+function sortDrinks(field) {
+    getCoffeeDrinks().then(drinks => {
+        const sortedDrinks = drinks.sort((a, b) => {
+            return b[field] - a[field];  // This will sort in descending order (highest to lowest)
+        });
+        displayCoffeeDrinks(sortedDrinks);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', getCoffeeDrinks);
