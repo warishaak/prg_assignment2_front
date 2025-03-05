@@ -52,7 +52,7 @@ async function addNewDrink() {
         }
 
         document.getElementById('drinkName').value = '';
-        document.getElementById('coffeShop').value = '';
+        document.getElementById('coffeeShop').value = '';
         document.getElementById('drinkRating').value = '';
 
         await getCoffeeDrinks();
@@ -133,4 +133,4 @@ async function getDrinkById(id) {
     }
 }
 
-    document.addEventListener('DOMContentLoaded', getCoffeeDrinks);
+document.addEventListener('DOMContentLoaded', getCoffeeDrinks);
