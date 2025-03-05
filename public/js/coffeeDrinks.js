@@ -6,7 +6,7 @@ function displayCoffeeDrinks(drinks) {
         const row = document.createElement('tr');
         row.innerHTML = `
                 <td>${drink.name}</td>
-                <td>${drink.description}</td>
+                <td>${drink.coffee_shop}</td>
                 <td>${drink.rating}</td>
                 <td class="action-buttons">
                     <button class="edit-btn" onclick="editDrink(${drink.id})">Edit</button>
@@ -30,10 +30,10 @@ async function getCoffeeDrinks() {
 
 async function addNewDrink() {
     const name = document.getElementById('drinkName').value;
-    const description = document.getElementById('drinkDescription').value;
+    const coffee_shop = document.getElementById('coffeeShop').value;
     const rating = parseInt(document.getElementById('drinkRating').value);
 
-    if (!name || !description || !rating) {
+    if (!name || !coffee_shop || !rating) {
         alert('Please fill in all fields');
         return;
     }
@@ -44,7 +44,7 @@ async function addNewDrink() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, description, rating }),
+            body: JSON.stringify({ name, coffee_shop, rating }),
         });
 
         if (!response.ok) {
@@ -52,7 +52,7 @@ async function addNewDrink() {
         }
 
         document.getElementById('drinkName').value = '';
-        document.getElementById('drinkDescription').value = '';
+        document.getElementById('coffeShop').value = '';
         document.getElementById('drinkRating').value = '';
 
         await getCoffeeDrinks();
@@ -72,17 +72,17 @@ async function editDrink(id) {
     }
 
     const name = prompt('Enter new name:', drink.name);
-    const description = prompt('Enter new description:', drink.description);
+    const coffee_shop = prompt('Enter new coffee shop:', drink.coffee_shop);
     const rating = parseInt(prompt('Enter new rating (1-5):', drink.rating));
 
-    if (name && description && rating) {
+    if (name && coffee_shop && rating) {
         try {
             const response = await fetch(`/api/coffee_drinks/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, description, rating }),
+                body: JSON.stringify({ name, coffee_shop, rating }),
             });
 
             if (!response.ok) {
