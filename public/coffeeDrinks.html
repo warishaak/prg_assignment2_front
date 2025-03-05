@@ -6,6 +6,7 @@
     <title>BrewLog - Coffee Journal</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Main container for drinks section with card-like appearance */
         .drinks-container {
             background: white;
             padding: 30px;
@@ -22,15 +23,19 @@
             margin-bottom: 20px;
         }
 
+        /* Input and select */
         .add-drink-form input, .add-drink-form select {
             margin: 10px 0;
             padding: 12px;
             width: 100%;
             max-width: 300px;
+            box-sizing: border-box;
             border: 2px solid #8B4513;
             border-radius: 6px;
+            height: 45px;
         }
 
+        /* Submit button */
         .add-drink-form button {
             background: #8B4513;
             color: white;
@@ -51,6 +56,7 @@
             margin-bottom: 20px;
         }
 
+        /* Table layout and structure */
         .drinks-table {
             width: 100%;
             border-collapse: collapse;
@@ -63,10 +69,23 @@
             border-bottom: 1px solid #A0522D;
         }
 
+        /* Table header */
         .drinks-table th {
             background-color: #8B4513;
             color: white;
             font-weight: bold;
+        }
+
+        /* Actions column width adjustment */
+        .drinks-table th:last-child {
+            text-align: center;
+            min-width: 200px;
+        }
+
+        /* Center align rating column */
+        .drinks-table th:nth-child(3),
+        .drinks-table td:nth-child(3) {
+            text-align: center;
         }
 
         .action-buttons button {
@@ -136,24 +155,26 @@
             </form>
         </div>
 
-        <div class="table-responsive">
-            <table class="drinks-table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Coffee Shop</th>
-                    <th>Rating</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody id="drinksTableBody"></tbody>
-            </table>
+            <!-- Table for displaying coffee drinks -->
+            <div class="table-responsive">
+                <table class="drinks-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Coffee Shop</th>
+                            <th>Rating</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="drinksTableBody"></tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        <p>© 2025 BrewLog - Your Personal Coffee Journal</p>
-    </footer>
-</div>
-<script src="/js/coffeeDrinks.js"></script>
+        <footer class="footer">
+            <p>© 2025 BrewLog - Your Personal Coffee Journal</p>
+        </footer>
+    </div>
+    <script src="/js/coffeeDrinks.js"></script>
 </body>
+</html>
