@@ -179,18 +179,17 @@ app.post('/api/upload_photo', upload.single('photo'), async (req, res) => {
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  const fileName = req.file.originalname; 
-
-  const formData = new FormData();
-  formData.append('file', new Blob([req.file.buffer], { type: 'image/png' }), fileName);
+  const fileName = `${Date.now()}-${req.file.originalname}`;
+  const fileData = req.file.buffer.toString('base64');
 
   try {
     const response = await fetch(`${SUPABASE_URL}/functions/v1/photos`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
       },
-      body: formData
+      body: JSON.stringify({ fileName, fileData })
     });
 
     const data = await response.json();
