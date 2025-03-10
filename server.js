@@ -2,10 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
-// Setup multer for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const multer = require('multer');
+const fetch = require('node-fetch');
 
 // Load environment variables
 dotenv.config();
@@ -146,6 +144,10 @@ app.get('/api/coffee_drinks/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Setup multer for file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // Photo endpoints
 
