@@ -3,6 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+// Setup multer for file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 // Load environment variables
 dotenv.config();
 
@@ -139,6 +143,80 @@ app.get('/api/coffee_drinks/:id', async (req, res) => {
     res.json(data[0]); // Return the first matching drink
   } catch (error) {
     console.error('GET request error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Photo endpoints
+
+// GET all photos from Supabase storage
+app.get('/api/photos', async (req, res) => {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/photos`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Supabase returned ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('GET photos error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//POST a new photo to Supabase storage
+app.post('/api/upload_photo', upload.single('photo'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const fileName = req.file.originalname; 
+
+  const formData = new FormData();
+  formData.append('file', new Blob([req.file.buffer], { type: 'image/png' }), fileName);
+
+  try {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/photos`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      },
+      body: formData
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//DELETE a specific photo from Supabase storage
+app.delete('/api/photos/:fileName', async (req, res) => {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/photos/${req.params.fileName}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Delete failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error('Delete error:', error);
     res.status(500).json({ error: error.message });
   }
 });
