@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrewLog - Photo Memories</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .photo-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .upload-section {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upload-section input[type="file"] {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .upload-button {
+            background: #8B4513;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1em;
+        }
+
+        .upload-button:hover {
+            background-color: #A0522D;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        .photo-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .delete-photo-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .photo-wrapper:hover .delete-photo-btn {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="icon-container">
+            <img src="/icons/logo.png" alt="BrewLog Coffee Journal Logo" class="icon">
+        </div>
+        <h1 class="title">Photo Memories</h1>
+        <p class="subtitle">Capture your coffee moments</p>
+    </header>
+
+    <div class="photo-container">
+        <div class="upload-section">
+            <h2>Add New Photo</h2>
+            <input type="file" id="photoInput" accept="image/*" />
+            <button id="uploadButton" class="upload-button">Upload Photo</button>
+        </div>
+
+        <div id="photos" class="gallery">
+            <!-- Photos will be displayed here -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 BrewLog - Your Personal Coffee Journal</p>
+    </footer>
+</div>
+<script src="/js/photoMemories.js"></script>
+</body>
+</html>
