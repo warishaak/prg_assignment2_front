@@ -1,78 +1,85 @@
-# APA1 Supa Task Frontend
+# Frontend - BrewLog - Personal Coffee Journal
 
 ## Project Overview
-This project for an open ending CRUD app, what the app does is your choice but it should implement CRUD functionality
+
+BrewLog is a personal coffee journal application that helps coffee enthusiasts track their coffee experiences. This web-based application allows users to log coffee drinks, rate them, and store photo memories of their coffee adventures.
+
+
+## Features
+
+1. **Coffee Drinks Tracker**
+- Add new coffee drinks with names, coffee shop locations, and ratings
+- View all your logged coffee drinks in a sortable table
+- Edit existing drinks to update details
+- Delete drinks you no longer want to track
+- Sort drinks by rating to quickly find your favorites
+
+2. **Photo Memories**
+- Upload PNG photos of your coffee experiences
+- Create a visual gallery of your coffee journey
+- Delete photos you no longer want to keep
+- All photos are securely stored in Supabase storage
+
+3. **User-Friendly Interface**
+- Clean, coffee-themed design
+- Responsive layout that works on multiple devices
+- Simple navigation between features
 
 ## Setup Instructions
-1. Install dependencies: Run `npm install` in your terminal to install all necessary dependencies.
+1. Clone the repository:
+   - git clone https://gitlab.booking.com/kaleemw/prg_assignment2_front.git
+
+2. Install dependencies: Run `npm install` in your terminal to install all necessary dependencies.
 2. Set up Supabase:
-   - Create a free Supabase account if you don't have one
-   - Create a new project in your Supabase dashboard
-   - Copy your Supabase URL and anon key into the `.env` file (use `.env.example` as a template)
-3. Start the development server: Run `node server.js` in your terminal.
-4. Open your web browser and navigate to `http://localhost:3000` to access the application.
+   - Create a .env file in the root directory with the following variables:
+   ```bash
+   PORT=3000
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. Start the development server: Run `node server.js` in your terminal.
+5. Open your web browser and navigate to `http://localhost:3000` to access the application.
 
 ## Database Management
 The project uses Supabase as the database provider:
 
-The [companion backend app](https://github.com/jdowie-ada/apa1-supa-task-backend) will be used to manage the database 
+The [companion backend app](https://sturdy-lamp-pj754qw7ggwqh6gwv.github.dev/) will be used to manage the database 
 
-## Testing
-This is an open-ended project, and you may choose your preferred testing approach:
-- Manual testing through the application interface
-- Leveraging Supabase's built-in Row Level Security (RLS) policy testing
-- Writing custom unit or integration tests with a framework of your choice (Jest, Mocha, etc.)
+## Architecture and Implementation Details
 
-## Assignment Objectives
-- Extend and enhance the existing web application
-- Apply database and frontend development principles using Supabase
-- Follow good programming standards
-- Develop and execute a testing strategy appropriate for your implementation
-- Use GitHub effectively for collaboration and documentation
-- Prepare for a viva to explain project design and code implementation
+**Backend**
+- Express.js server that handles API requests and serves static files
+- Supabase integration for database and storage
+- RESTful API endpoints for CRUD operations on coffee drinks and photos
+- Proxy architecture to securely interact with Supabase
 
-## TODO
+**Frontend**
+- HTML, CSS, and JavaScript implementation
+- Responsive design using CSS Grid and Flexbox
+- Module-based JavaScript for better code organization
+- Asynchronous API calls with Fetch API
 
-### Core Functionalities
-1. Implement full CRUD operations for all items using Supabase's JavaScript client
-2. Create a unified interface to manage all items
-3. Create appropriate database relationships and constraints using Supabase's SQL editor
+## Good Programming Practices 
 
-### Extend Functionalities
-1. User login auth etc.
-2. Enhance the frontend to display and manage the various items
-3. Implement sorting and filtering options
-4. (on backend) write more edge functions to extend API
+**Separation of Concerns**
 
-You're free to come up with your own ideas too either on the front or backend
+- Backend API handling separate from frontend views
+- Modular JavaScript files for different features
 
-### Good Programming Standards
-1. Structure your code for readability and modularity
-2. Use consistent naming conventions
-3. Implement proper error handling 
-4. Document your code thoroughly
-etc.
+**Error Handling**
 
-### Testing
-Ideas for testing:
-1. Document manual testing procedures and results
-2. Leverage Supabase's RLS policies and test them
-3. Write unit/integration tests for critical functionality
+- Comprehensive try/catch blocks for API calls
+- User-friendly error messages
+- Console logging for debugging
 
-### GitHub Practices
-1. Use Git and GitHub for version control
-2. Create a comprehensive README documenting your implementation (replace this README)
-3. Make small, meaningful commits with clear messages
-4. Create a project board to track your progress (optional)
+**Performance Optimization**
 
-## Additional Features (Optional)
-1. Implement responsive design for different devices
-2. Add accessibility features following WCAG guidelines
-3. Implement more advanced Supabase features:
-   - Real-time updates using Supabase subscriptions
-   - Storage for product images
-   - Edge Functions for complex operations
-4. Add analytics dashboard using Supabase's built-in analytics
+- Async/await for non-blocking operations
+- Efficient DOM manipulation
+- Minimalistic CSS for faster page loading
 
+**User Experience**
 
-Remember to document your development process, including any challenges you encounter and how you solve them. This will be valuable during your viva and for maintaining the project in the future.
+- Confirmation messages for destructive actions
+- Immediate feedback after user actions
+- Intuitive interface with visual cues
