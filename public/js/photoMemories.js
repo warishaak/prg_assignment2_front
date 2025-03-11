@@ -1,3 +1,13 @@
+// Get the Supabase URL from the server when needed
+async function getSupabaseUrl() {
+    try {
+        const response = await fetch('/api/supabase_url');
+        return (await response.json()).url;
+    } catch (error) {
+        console.error('Error fetching Supabase URL:', error);
+        return null;
+    }
+}
 //upload photo to the server
 async function uploadPhoto() {
     const fileInput = document.getElementById("photoInput");
@@ -19,9 +29,12 @@ async function uploadPhoto() {
         });
 
         const data = await response.json();
-        const imageUrl = URL.createObjectURL(file);
-        addPhotoToGallery(imageUrl, newFileName);
-        // Clear the file input for future uploads
+
+        // Get the supabase URL for a permanent reference to the file
+        const supabaseUrl = await getSupabaseUrl();
+        const permanentUrl = `${supabaseUrl}/storage/v1/object/public/coffee-photos/${newFileName}`;
+
+        addPhotoToGallery(permanentUrl, newFileName);
         fileInput.value = '';
     } catch (error) {
         console.error('Upload error:', error);
@@ -73,11 +86,12 @@ async function deletePhoto(fileName, wrapper) {
 //Loads existing photos from the server when the page loads
 async function loadExistingPhotos() {
     try {
+        const supabaseUrl = await getSupabaseUrl();
         const response = await fetch('/api/photos');
         const data = await response.json();
 
         data.forEach(photo => {
-            const imageUrl = `${SUPABASE_URL}/storage/v1/object/public/coffee-photos/${photo.name}`;
+            const imageUrl = `${supabaseUrl}/storage/v1/object/public/coffee-photos/${photo.name}`;
             addPhotoToGallery(imageUrl, photo.name);
         });
     } catch (error) {
