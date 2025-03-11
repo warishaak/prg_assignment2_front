@@ -226,6 +226,11 @@ app.delete('/api/photos/:fileName', async (req, res) => {
   }
 });
 
+// endpoint to provide the Supabase URL to the frontend
+app.get('/api/supabase_url', (req, res) => {
+  res.json({ url: SUPABASE_URL });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Proxy server running on http://localhost:${PORT}`);

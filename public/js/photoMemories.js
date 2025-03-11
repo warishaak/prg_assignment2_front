@@ -50,7 +50,6 @@ function addPhotoToGallery(imageUrl, fileName) {
 
     const img = document.createElement("img");
     img.src = imageUrl;
-    img.alt = "Coffee Photo";
     img.className = "gallery-image";
 
     const deleteBtn = document.createElement("button");
