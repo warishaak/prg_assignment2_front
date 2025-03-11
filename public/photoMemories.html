@@ -53,21 +53,27 @@
             padding: 20px;
         }
 
+        .photo-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         .gallery-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px 8px 0 0;
             transition: transform 0.3s ease;
         }
 
         .gallery-image:hover {
             transform: scale(1.05);
-        }
-        .photo-wrapper {
-            position: relative;
-            display: inline-block;
         }
 
         .delete-photo-btn {
@@ -94,7 +100,7 @@
 <div class="container">
     <header class="header">
         <div class="icon-container">
-            <img src="/icons/logo.png" alt="BrewLog Coffee Journal Logo" class="icon">
+            <img src="/icons/logo_icon.png" alt="BrewLog Coffee Journal Logo" class="icon">
         </div>
         <h1 class="title">Photo Memories</h1>
         <p class="subtitle">Capture your coffee moments</p>

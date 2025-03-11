@@ -179,6 +179,10 @@ app.post('/api/upload_photo', upload.single('photo'), async (req, res) => {
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
+  if (!req.file.originalname.toLowerCase().endsWith('.png') || req.file.mimetype !== 'image/png') {
+    return res.status(400).json({ error: 'Only PNG files are allowed' });
+  }
+
   const fileName = `${Date.now()}-${req.file.originalname}`;
   const fileData = req.file.buffer.toString('base64');
 

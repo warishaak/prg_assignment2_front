@@ -87,5 +87,6 @@ async function loadExistingPhotos() {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("uploadButton").addEventListener("click", uploadPhoto);
+    document.getElementById("photoInput").accept = ".png,image/png";
     loadExistingPhotos();
 });
